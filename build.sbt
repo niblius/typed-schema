@@ -143,6 +143,7 @@ val scalacheck      = "org.scalacheck"    %% "scalacheck"        % Version.scala
 val akkaTestKit     = "com.typesafe.akka" %% "akka-testkit"      % Version.akka % Test
 val akkaHttpTestKit = "com.typesafe.akka" %% "akka-http-testkit" % Version.akkaHttp % Test
 val finagleHttp     = "com.twitter"       %% "finagle-http"      % Version.finagle
+val http4sLib       = "org.http4s"        %% "http4s-core"       % Version.http4s
 val scalazDeriving  = "org.scalaz"        %% "scalaz-deriving"   % Version.scalazDeriving
 val scalazDMacro    = "org.scalaz"        %% "deriving-macro"    % Version.scalazDeriving
 val derevo          = "org.manatki"       %% "derevo-cats"       % Version.derevo
@@ -243,6 +244,15 @@ lazy val finagle = project
     commonSettings,
     moduleName := "typed-schema-finagle",
     libraryDependencies ++= finagleHttp :: catsEffect :: catsFree :: Nil
+  )
+
+lazy val http4s = project
+  .in(file("modules/http4s"))
+  .dependsOn(kernel, macros, param)
+  .settings(
+    commonSettings,
+    moduleName := "typed-schema-http4s",
+    libraryDependencies ++= http4sLib :: catsEffect :: Nil
   )
 
 lazy val finagleCirce = project
@@ -351,6 +361,7 @@ lazy val typedschema =
       param,      //
       swagger,    //
       akkaHttp,   //
+      http4s,     //
       scalaz,     //
       finagle,    //
       finagleZio, //

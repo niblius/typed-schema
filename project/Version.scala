@@ -41,6 +41,8 @@ object Version {
 
   val finagle = "19.9.0"
 
+  val http4s = "0.21.0-M5"
+
   val derevo = "0.8.1"
 
   val tofu = "0.2.0"
