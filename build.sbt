@@ -1,6 +1,6 @@
 import com.typesafe.sbt.SbtGit.git
 
-val pubVersion = "0.11.0-RC3"
+val pubVersion = "0.11.0-RC3-my"
 
 val publishSettings = List(
   name := "Typed Schema",
@@ -150,6 +150,7 @@ val derevo          = "org.manatki"       %% "derevo-cats"       % Version.derev
 val swaggerUILib    = "org.webjars.npm"   % "swagger-ui-dist"    % Version.swaggerUI
 val scalaTags       = "com.lihaoyi"       %% "scalatags"         % Version.scalaTags
 val env             = "ru.tinkoff"        %% "tofu-env"          % Version.tofu
+val http4sCirce     = "org.http4s"        %% "http4s-circe"      % Version.http4s
 
 val akka   = List("actor", "stream").map(module => "com.typesafe.akka" %% s"akka-$module" % Version.akka)
 val zio    = List("dev.zio" %% "zio" % Version.zio, "dev.zio" %% "zio-interop-cats" % Version.zioCats)
@@ -252,7 +253,8 @@ lazy val http4s = project
   .settings(
     commonSettings,
     moduleName := "typed-schema-http4s",
-    libraryDependencies ++= http4sLib :: catsEffect :: Nil
+    libraryDependencies ++= http4sLib :: http4sCirce :: catsEffect :: Nil,
+    circe
   )
 
 lazy val finagleCirce = project
